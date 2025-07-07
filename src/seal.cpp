@@ -47,8 +47,10 @@ void endFrame() { g_window->display(); }
 void seal::init() {
     static bool initialized = false;
     if (!initialized) {
-        g_window =
-            std::make_unique<sf::RenderWindow>(sf::VideoMode({g_width, g_height}), g_currentTitle, sf::Style::Close);
+        sf::ContextSettings settings;
+        settings.antiAliasingLevel = 8;
+        g_window = std::make_unique<sf::RenderWindow>(sf::VideoMode({g_width, g_height}), g_currentTitle,
+                                                      sf::Style::Close, sf::State::Windowed, settings);
         sf::View view(sf::FloatRect({0, 0}, {static_cast<float>(g_width), static_cast<float>(g_height)}));
         g_window->setView(view);
         g_window->setFramerateLimit(60);

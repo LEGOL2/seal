@@ -35,12 +35,38 @@ void seal::line(float x1, float y1, float x2, float y2) {
     g_window->draw(shape);
 }
 
+void seal::point(float x, float y) {
+    const sf::Vertex vertex{sf::Vector2f(x, y), g_currentStroke};
+    g_window->draw(&vertex, 1, sf::PrimitiveType::Points);
+}
+
+void seal::quad(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4) {
+    sf::ConvexShape shape(4);
+    shape.setPoint(0, {x1, y1});
+    shape.setPoint(1, {x2, y2});
+    shape.setPoint(2, {x3, y3});
+    shape.setPoint(3, {x4, y4});
+    set_position_fill_stroke(shape, {0, 0});
+    g_window->draw(shape);
+}
+
 void seal::rect(float x, float y, float w, float h) {
     sf::RectangleShape shape({w, h});
     set_position_fill_stroke(shape, {x, y});
     g_window->draw(shape);
 }
 
-void seal::strokeWeight(float weight) {
-    g_currentStrokeWeight = weight;
+void seal::square(float x, float y, float extent) {
+    rect(x, y, extent, extent);
 }
+
+void seal::triangle(float x1, float y1, float x2, float y2, float x3, float y3) {
+    sf::ConvexShape shape(3);
+    shape.setPoint(0, {x1, y1});
+    shape.setPoint(1, {x2, y2});
+    shape.setPoint(2, {x3, y3});
+    set_position_fill_stroke(shape, {0, 0});
+    g_window->draw(shape);
+}
+
+void seal::strokeWeight(float weight) { g_currentStrokeWeight = weight; }
