@@ -9,7 +9,7 @@ sf::String g_currentTitle{"seal"};
 sf::Color g_currentBackground{200, 200, 200};
 sf::Color g_currentFill{255, 255, 255};
 sf::Color g_currentStroke{0, 0, 0};
-float g_currentStrokeWeight{4};
+float g_currentStrokeWeight{2};
 bool g_strokeEnabled{true};
 
 float g_mouseX{0}, g_mouseY{0};

@@ -26,13 +26,20 @@ void seal::ellipse(float x, float y, float width, float height) {
 }
 
 void seal::line(float x1, float y1, float x2, float y2) {
-    const sf::Vector2f vec = {x2 - x1, y2 - y1};
-    const sf::Angle angle = sf::radians(std::atan2f(vec.y, vec.x));
-    sf::RectangleShape shape({vec.length(), g_currentStrokeWeight});
-    shape.setPosition({x1, y1});
-    shape.rotate(angle);
-    shape.setFillColor(g_currentStroke);
-    g_window->draw(shape);
+    if (g_currentStrokeWeight <= 2) {  // Use primitive line
+        sf::VertexArray line(sf::PrimitiveType::Lines, 2);
+        line[0] = sf::Vertex{sf::Vector2f(x1, y1), g_currentStroke};
+        line[1] = sf::Vertex{sf::Vector2f(x2, y2), g_currentStroke};
+        g_window->draw(line);
+    } else {  // Use rotated rectangle
+        const sf::Vector2f vec = {x2 - x1, y2 - y1};
+        sf::RectangleShape shape({std::hypot(vec.x, vec.y), g_currentStrokeWeight});
+        shape.setPosition({x1, y1});
+        shape.setOrigin({0, g_currentStrokeWeight / 2.f});
+        shape.setRotation(sf::radians(std::atan2f(vec.y, vec.x)));
+        shape.setFillColor(g_currentStroke);
+        g_window->draw(shape);
+    }
 }
 
 void seal::point(float x, float y) {
@@ -56,9 +63,7 @@ void seal::rect(float x, float y, float w, float h) {
     g_window->draw(shape);
 }
 
-void seal::square(float x, float y, float extent) {
-    rect(x, y, extent, extent);
-}
+void seal::square(float x, float y, float extent) { rect(x, y, extent, extent); }
 
 void seal::triangle(float x1, float y1, float x2, float y2, float x3, float y3) {
     sf::ConvexShape shape(3);
