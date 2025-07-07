@@ -10,11 +10,17 @@ namespace seal {
 void init();
 void run();
 
-// Drawing
+// Settings
 void background(uint8_t gray);
 void background(uint8_t red, uint8_t green, uint8_t blue);
 void fill(uint8_t gray);
 void fill(uint8_t red, uint8_t green, uint8_t blue);
+
+// Shape
+void arc(float a, float b, float c, float d, float start, float stop);
+void arc(float a, float b, float c, float d, float start, float stop, float mode);
+void circle(float x, float y, float radius = 1);
+void ellipse(float x, float y, float width, float height);
 void rect(float x, float y, float w, float h);
 
 // Window settings

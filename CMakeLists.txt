@@ -15,9 +15,10 @@ FetchContent_Declare(SFML
 FetchContent_MakeAvailable(SFML)
 
 add_library(${PROJECT_NAME})
-target_sources(${PROJECT_NAME} PRIVATE src/seal.cpp src/util.cpp)
+set_property(TARGET ${PROJECT_NAME} PROPERTY COMPILE_WARNING_AS_ERROR ON)
+# target_sources(${PROJECT_NAME} PRIVATE src/seal.cpp)
+add_subdirectory(src)
 target_include_directories(${PROJECT_NAME} PUBLIC include)
-target_include_directories(${PROJECT_NAME} PRIVATE src)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE SFML::Graphics)
 
