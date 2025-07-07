@@ -6,10 +6,10 @@ std::unique_ptr<sf::RenderWindow> g_window{};
 uint32_t g_width{400}, g_height{400};
 sf::String g_currentTitle{"seal"};
 
-sf::Color g_currentBackground{0, 0, 0};
+sf::Color g_currentBackground{200, 200, 200};
 sf::Color g_currentFill{255, 255, 255};
 sf::Color g_currentStroke{0, 0, 0};
-float g_currentStrokeWeight{1};
+float g_currentStrokeWeight{4};
 bool g_strokeEnabled{true};
 
 float g_mouseX{0}, g_mouseY{0};
@@ -47,7 +47,8 @@ void endFrame() { g_window->display(); }
 void seal::init() {
     static bool initialized = false;
     if (!initialized) {
-        g_window = std::make_unique<sf::RenderWindow>(sf::VideoMode({g_width, g_height}), g_currentTitle, sf::Style::Close);
+        g_window =
+            std::make_unique<sf::RenderWindow>(sf::VideoMode({g_width, g_height}), g_currentTitle, sf::Style::Close);
         sf::View view(sf::FloatRect({0, 0}, {static_cast<float>(g_width), static_cast<float>(g_height)}));
         g_window->setView(view);
         g_window->setFramerateLimit(60);
@@ -75,6 +76,8 @@ void seal::background(uint8_t red, uint8_t green, uint8_t blue) { g_currentBackg
 void seal::fill(uint8_t gray) { g_currentFill = {gray, gray, gray}; }
 
 void seal::fill(uint8_t red, uint8_t green, uint8_t blue) { g_currentFill = {red, green, blue}; }
+
+void seal::stroke(uint8_t red, uint8_t green, uint8_t blue) { g_currentStroke = {red, green, blue}; }
 
 void seal::size(uint32_t w, uint32_t h) {
     g_width = w;

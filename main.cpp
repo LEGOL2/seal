@@ -11,7 +11,9 @@ void draw() {
     background(51);
 
     fill(150, 95, 200);
-    ellipse(200, 200, 150, 100);
+    stroke(150, 95, 200);
+    strokeWeight(5);
+    line(200, 200, 70, 30);
 }
 
 int main() { run(); }
