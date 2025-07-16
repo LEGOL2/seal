@@ -5,6 +5,8 @@ Example
 ```c++
 #include <seal/seal.hpp>
 
+using namespace seal;
+
 void setup() {
     size(800, 600);
     windowTitle("My Animation");

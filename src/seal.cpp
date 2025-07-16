@@ -42,8 +42,8 @@ void handleEvents() {
                 g_window->close();
             }
         } else if (const auto* mouseMoved = event->getIf<sf::Event::MouseMoved>()) {
-            g_mouseX = mouseMoved->position.x;
-            g_mouseY = mouseMoved->position.y;
+            g_mouseX = static_cast<float>(mouseMoved->position.x);
+            g_mouseY = static_cast<float>(mouseMoved->position.y);
         } else if (const auto* mousePressed = event->getIf<sf::Event::MouseButtonPressed>()) {
             g_mouseIsPressed = true;
         } else if (const auto* mousePressed = event->getIf<sf::Event::MouseButtonReleased>()) {
