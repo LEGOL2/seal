@@ -2,11 +2,14 @@
 
 #include <SFML/Graphics.hpp>
 #include <memory>
+#include <seal.hpp>
 
 // Global state
 extern std::unique_ptr<sf::RenderWindow> g_window;
 extern uint32_t g_width, g_height;
 extern sf::String g_currentTitle;
+
+extern enum seal::EllipseMode g_currentEllipseMode;
 
 extern sf::Color g_currentBackground;
 extern sf::Color g_currentFill;

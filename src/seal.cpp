@@ -1,10 +1,13 @@
 #include <SFML/Graphics.hpp>
 #include <global_state.hpp>
 #include <seal.hpp>
+#include <stack>
 
 std::unique_ptr<sf::RenderWindow> g_window{};
 uint32_t g_width{400}, g_height{400};
 sf::String g_currentTitle{"seal"};
+
+enum seal::EllipseMode g_currentEllipseMode{seal::EllipseMode::CENTER};
 
 sf::Color g_currentBackground{200, 200, 200};
 sf::Color g_currentFill{255, 255, 255};
@@ -17,6 +20,16 @@ float g_mouseX{0}, g_mouseY{0};
 bool g_mouseIsPressed{false};
 
 namespace {
+// Holds information controlled by fill(), stroke(), tint(), strokeWeight(), strokeCap(), strokeJoin(), imageMode(),
+// rectMode(), ellipseMode(), shapeMode(), colorMode(), textAlign(), textFont(), textMode(), textSize(), textLeading(),
+// emissive(), specular(), shininess(), ambient()
+struct StyleState {
+    sf::Color fill, stroke;
+    float strokeWeight;
+    bool fillEnabled, strokeEnabled;
+};
+std::stack<StyleState> g_styleStack;
+
 void handleEvents() {
     while (const std::optional event = g_window->pollEvent()) {
         if (event->is<sf::Event::Closed>()) {
@@ -93,6 +106,25 @@ void seal::noStroke() { g_strokeEnabled = false; }
 void seal::stroke(uint8_t red, uint8_t green, uint8_t blue) {
     g_strokeEnabled = true;
     g_currentStroke = {red, green, blue};
+}
+
+void seal::popStyle() {
+    if (g_styleStack.empty()) {
+        return;
+    }
+
+    const auto& style = g_styleStack.top();
+    g_currentFill = style.fill;
+    g_currentStroke = style.stroke;
+    g_currentStrokeWeight = style.strokeWeight;
+    g_fillEnabled = style.fillEnabled;
+    g_strokeEnabled = style.strokeEnabled;
+
+    g_styleStack.pop();
+}
+
+void seal::pushStyle() {
+    g_styleStack.push({g_currentFill, g_currentStroke, g_currentStrokeWeight, g_fillEnabled, g_strokeEnabled});
 }
 
 void seal::size(uint32_t w, uint32_t h) {

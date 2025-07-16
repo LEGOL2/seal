@@ -5,7 +5,7 @@
 
 static void set_position_fill_stroke(sf::Shape &shape, sf::Vector2f position) {
     shape.setPosition(position);
-    
+
     if (g_fillEnabled) {
         shape.setFillColor(g_currentFill);
     } else {
@@ -19,14 +19,40 @@ static void set_position_fill_stroke(sf::Shape &shape, sf::Vector2f position) {
 }
 
 void seal::circle(float x, float y, float radius) {
+    if (g_strokeEnabled) {
+        radius -= g_currentStrokeWeight / 2.f;
+    }
     sf::CircleShape shape(radius);
     set_position_fill_stroke(shape, {x - radius, y - radius});
     g_window->draw(shape);
 }
 
-void seal::ellipse(float x, float y, float width, float height) {
-    EllipseShape shape({width, height});
-    set_position_fill_stroke(shape, {x - width, y - height});
+void seal::ellipse(float a, float b, float c, float d) {
+    float r1, r2;
+    switch (g_currentEllipseMode) {
+        case CENTER:
+            r1 = c / 2.f;
+            r2 = d / 2.f;
+            break;
+        case RADIUS:
+            r1 = c;
+            r2 = d;
+            break;
+        case CORNER:
+            break;
+        case CORNERS:
+            break;
+        default:
+            return;
+    }
+
+    if (g_strokeEnabled) {
+        r1 -= g_currentStrokeWeight / 2.f;
+        r2 -= g_currentStrokeWeight / 2.f;
+    }
+
+    EllipseShape shape({r1, r2});
+    set_position_fill_stroke(shape, {a - r1, b - r2});
     g_window->draw(shape);
 }
 
@@ -78,5 +104,7 @@ void seal::triangle(float x1, float y1, float x2, float y2, float x3, float y3) 
     set_position_fill_stroke(shape, {0, 0});
     g_window->draw(shape);
 }
+
+void seal::ellipseMode(seal::EllipseMode mode) { g_currentEllipseMode = mode; }
 
 void seal::strokeWeight(float weight) { g_currentStrokeWeight = weight; }

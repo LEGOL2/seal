@@ -10,20 +10,23 @@ void setup() {
 void draw() {
     background(51);
 
-    fill(150, 95, 200);
-    stroke(25, 95, 200);
-    strokeWeight(4);
+    size(400, 400);
 
-    quad(152, 124, 344, 80, 276, 252, 120, 304);
-    fill(50, 250, 175);
-    triangle(50, 300, 145, 200, 300, 170);
-    
-    noFill();
-    ellipse(400, 300, 100, 150);
+    ellipse(0, 200, 132, 132);  // Left circle
 
-    fill(150, 95, 200);
-    noStroke();
-    rect(600, 400, 150, 80);
+    pushStyle();  // Start a new style
+    strokeWeight(40);
+    fill(204, 153, 0);
+    ellipse(132, 200, 132, 132);  // Left-middle circle
+
+    pushStyle();  // Start another new style
+    stroke(0, 102, 153);
+    ellipse(264, 200, 132, 132);  // Right-middle circle
+    popStyle();                   // Restore the previous style
+
+    popStyle();  // Restore original style
+
+    ellipse(400, 200, 132, 132);  // Right circle
 }
 
 int main() { run(); }

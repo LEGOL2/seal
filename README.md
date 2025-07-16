@@ -88,6 +88,7 @@ int main() {
 - [x] `square()` - Draws a square to the screen
 - [x] `triangle()` - A triangle is a plane created by connecting three points
 ### Attributes
+- [x] `ellipseMode()` - Modifies the location from which ellipses are drawn by changing the way in which parameters given to ellipse() and `circle()` are interpreted.
 - [x] `strokeWeight()` - Sets the width of the stroke used for lines, points, and the border around shapes
 
 ## Output
@@ -109,6 +110,8 @@ int main() {
 ## Transform
 
 ## Structure
+- [x] `popStyle()` - Saves the current style settings and popStyle() restores the prior settings
+- [x] `pushStyle()` - Saves the current style settings and popStyle() restores the prior settings
 
 ## Control
 
