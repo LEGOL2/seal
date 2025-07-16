@@ -1,6 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <global_state.hpp>
-#include <seal.hpp>
+#include <seal/seal.hpp>
 #include <stack>
 
 std::unique_ptr<sf::RenderWindow> g_window{};

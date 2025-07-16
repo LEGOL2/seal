@@ -2,7 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <memory>
-#include <seal.hpp>
+#include <seal/seal.hpp>
 
 // Global state
 extern std::unique_ptr<sf::RenderWindow> g_window;

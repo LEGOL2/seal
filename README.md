@@ -3,7 +3,8 @@ C++ implementation of [Processing](https://processing.org/)
 
 Example
 ```c++
-#include <seal.hpp>
+#include <seal/seal.hpp>
+
 void setup() {
     size(800, 600);
     windowTitle("My Animation");

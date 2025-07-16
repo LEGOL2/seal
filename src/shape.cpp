@@ -1,7 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <global_state.hpp>
 #include <helper.hpp>
-#include <seal.hpp>
+#include <seal/seal.hpp>
 #include <shapes/ellipse.hpp>
 
 static void set_position_fill_stroke(sf::Shape &shape, sf::Vector2f position) {

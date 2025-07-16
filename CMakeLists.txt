@@ -22,5 +22,8 @@ target_include_directories(${PROJECT_NAME} PUBLIC include)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE SFML::Graphics)
 
+install(TARGETS ${PROJECT_NAME} DESTINATION lib)
+install(DIRECTORY include/seal DESTINATION include)
+
 add_executable(app main.cpp)
 target_link_libraries(app PRIVATE ${PROJECT_NAME})

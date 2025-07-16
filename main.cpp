@@ -1,4 +1,4 @@
-#include <seal.hpp>
+#include <seal/seal.hpp>
 
 using namespace seal;
 
