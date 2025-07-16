@@ -8,6 +8,7 @@ sf::String g_currentTitle{"seal"};
 
 sf::Color g_currentBackground{200, 200, 200};
 sf::Color g_currentFill{255, 255, 255};
+bool g_fillEnabled{true};
 sf::Color g_currentStroke{0, 0, 0};
 float g_currentStrokeWeight{2};
 bool g_strokeEnabled{true};
@@ -75,11 +76,24 @@ void seal::run() {
 void seal::background(uint8_t gray) { g_currentBackground = {gray, gray, gray}; }
 void seal::background(uint8_t red, uint8_t green, uint8_t blue) { g_currentBackground = {red, green, blue}; }
 
-void seal::fill(uint8_t gray) { g_currentFill = {gray, gray, gray}; }
+void seal::fill(uint8_t gray) {
+    g_fillEnabled = true;
+    g_currentFill = {gray, gray, gray};
+}
 
-void seal::fill(uint8_t red, uint8_t green, uint8_t blue) { g_currentFill = {red, green, blue}; }
+void seal::fill(uint8_t red, uint8_t green, uint8_t blue) {
+    g_fillEnabled = true;
+    g_currentFill = {red, green, blue};
+}
 
-void seal::stroke(uint8_t red, uint8_t green, uint8_t blue) { g_currentStroke = {red, green, blue}; }
+void seal::noFill() { g_fillEnabled = false; }
+
+void seal::noStroke() { g_strokeEnabled = false; }
+
+void seal::stroke(uint8_t red, uint8_t green, uint8_t blue) {
+    g_strokeEnabled = true;
+    g_currentStroke = {red, green, blue};
+}
 
 void seal::size(uint32_t w, uint32_t h) {
     g_width = w;

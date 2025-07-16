@@ -45,7 +45,7 @@ C++ implementation of [Processing](https://processing.org/)
 
 ## Shape
 ### 2D primitives
-- [] `arc()` - Draws an arc in the display window
+- [ ] `arc()` - Draws an arc in the display window
 - [x] `circle()` - Draws a circle to the screen
 - [x] `ellipse()` - Draws an ellipse (oval) in the display window
 - [x] `line()` - Draws a line (a direct path between two points) to the screen
@@ -69,8 +69,8 @@ C++ implementation of [Processing](https://processing.org/)
 - [x] `clear()` - Clears the pixels within a buffer
 - [ ] `colorMode()` - Changes the way Processing interprets color data
 - [x] `fill()` - Sets the color used to fill shapes
-- [ ] `noFill()` - Disables filling geometry
-- [ ] `noStroke()` - Disables drawing the stroke (outline)
+- [x] `noFill()` - Disables filling geometry
+- [x] `noStroke()` - Disables drawing the stroke (outline)
 - [x] `stroke()` - Sets the color used to draw lines and borders around shapes
 
 ## Transform

@@ -10,6 +10,7 @@ extern sf::String g_currentTitle;
 
 extern sf::Color g_currentBackground;
 extern sf::Color g_currentFill;
+extern bool g_fillEnabled;
 extern sf::Color g_currentStroke;
 extern float g_currentStrokeWeight;
 extern bool g_strokeEnabled;

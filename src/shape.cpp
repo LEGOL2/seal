@@ -5,7 +5,12 @@
 
 static void set_position_fill_stroke(sf::Shape &shape, sf::Vector2f position) {
     shape.setPosition(position);
-    shape.setFillColor(g_currentFill);
+    
+    if (g_fillEnabled) {
+        shape.setFillColor(g_currentFill);
+    } else {
+        shape.setFillColor(sf::Color::Transparent);
+    }
 
     if (g_strokeEnabled) {
         shape.setOutlineThickness(g_currentStrokeWeight);
