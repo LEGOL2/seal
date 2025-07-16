@@ -89,7 +89,7 @@ void seal::size(uint32_t w, uint32_t h) {
     g_window->setView(view);
 }
 
-void seal::title(const char* title) {
+void seal::windowTitle(const char* title) {
     g_currentTitle = title;
     g_window->setTitle(g_currentTitle);
 }
