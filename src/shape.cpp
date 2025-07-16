@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <global_state.hpp>
+#include <helper.hpp>
 #include <seal.hpp>
 #include <shapes/ellipse.hpp>
 
@@ -19,10 +20,13 @@ static void set_position_fill_stroke(sf::Shape &shape, sf::Vector2f position) {
 }
 
 void seal::circle(float x, float y, float radius) {
-    if (g_strokeEnabled) {
-        radius -= g_currentStrokeWeight / 2.f;
-    }
     sf::CircleShape shape(radius);
+
+    if (g_strokeEnabled) {
+        const float halfStroke = g_currentStrokeWeight / 2.f;
+        shape.setRadius(radius - halfStroke);
+    }
+
     set_position_fill_stroke(shape, {x - radius, y - radius});
     g_window->draw(shape);
 }
@@ -47,8 +51,9 @@ void seal::ellipse(float a, float b, float c, float d) {
     }
 
     if (g_strokeEnabled) {
-        r1 -= g_currentStrokeWeight / 2.f;
-        r2 -= g_currentStrokeWeight / 2.f;
+        const float halfStroke = g_currentStrokeWeight / 2.f;
+        r1 -= halfStroke;
+        r2 -= halfStroke;
     }
 
     EllipseShape shape({r1, r2});
@@ -80,16 +85,40 @@ void seal::point(float x, float y) {
 
 void seal::quad(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4) {
     sf::ConvexShape shape(4);
-    shape.setPoint(0, {x1, y1});
-    shape.setPoint(1, {x2, y2});
-    shape.setPoint(2, {x3, y3});
-    shape.setPoint(3, {x4, y4});
+
+    if (g_strokeEnabled) {
+        const float halfStroke = g_currentStrokeWeight / 2.f;
+        const float centroidX = (x1 + x2 + x3 + x4) / 4.0f;
+        const float centroidY = (y1 + y2 + y3 + y4) / 4.0f;
+        shape.setPoint(0, {x1 + (centroidX - x1) * (halfStroke / distance(x1, y1, centroidX, centroidY)),
+                           y1 + (centroidY - y1) * (halfStroke / distance(x1, y1, centroidX, centroidY))});
+        shape.setPoint(1, {x2 + (centroidX - x2) * (halfStroke / distance(x2, y2, centroidX, centroidY)),
+                           y2 + (centroidY - y2) * (halfStroke / distance(x2, y2, centroidX, centroidY))});
+        shape.setPoint(2, {x3 + (centroidX - x3) * (halfStroke / distance(x3, y3, centroidX, centroidY)),
+                           y3 + (centroidY - y3) * (halfStroke / distance(x3, y3, centroidX, centroidY))});
+        shape.setPoint(3, {x4 + (centroidX - x4) * (halfStroke / distance(x4, y4, centroidX, centroidY)),
+                           y4 + (centroidY - y4) * (halfStroke / distance(x4, y4, centroidX, centroidY))});
+    } else {
+        shape.setPoint(0, {x1, y1});
+        shape.setPoint(1, {x2, y2});
+        shape.setPoint(2, {x3, y3});
+        shape.setPoint(3, {x4, y4});
+    }
+
     set_position_fill_stroke(shape, {0, 0});
     g_window->draw(shape);
 }
 
 void seal::rect(float x, float y, float w, float h) {
     sf::RectangleShape shape({w, h});
+
+    if (g_strokeEnabled) {
+        const float halfStroke = g_currentStrokeWeight / 2.f;
+        shape.setSize({w - g_currentStrokeWeight, h - g_currentStrokeWeight});
+        x += halfStroke;
+        y += halfStroke;
+    }
+
     set_position_fill_stroke(shape, {x, y});
     g_window->draw(shape);
 }
@@ -98,9 +127,23 @@ void seal::square(float x, float y, float extent) { rect(x, y, extent, extent); 
 
 void seal::triangle(float x1, float y1, float x2, float y2, float x3, float y3) {
     sf::ConvexShape shape(3);
-    shape.setPoint(0, {x1, y1});
-    shape.setPoint(1, {x2, y2});
-    shape.setPoint(2, {x3, y3});
+
+    if (g_strokeEnabled) {
+        const float halfStroke = g_currentStrokeWeight / 2.f;
+        const float centroidX = (x1 + x2 + x3) / 3.0f;
+        const float centroidY = (y1 + y2 + y3) / 3.0f;
+        shape.setPoint(0, {x1 + (centroidX - x1) * (halfStroke / distance(x1, y1, centroidX, centroidY)),
+                           y1 + (centroidY - y1) * (halfStroke / distance(x1, y1, centroidX, centroidY))});
+        shape.setPoint(1, {x2 + (centroidX - x2) * (halfStroke / distance(x2, y2, centroidX, centroidY)),
+                           y2 + (centroidY - y2) * (halfStroke / distance(x2, y2, centroidX, centroidY))});
+        shape.setPoint(2, {x3 + (centroidX - x3) * (halfStroke / distance(x3, y3, centroidX, centroidY)),
+                           y3 + (centroidY - y3) * (halfStroke / distance(x3, y3, centroidX, centroidY))});
+    } else {
+        shape.setPoint(0, {x1, y1});
+        shape.setPoint(1, {x2, y2});
+        shape.setPoint(2, {x3, y3});
+    }
+
     set_position_fill_stroke(shape, {0, 0});
     g_window->draw(shape);
 }

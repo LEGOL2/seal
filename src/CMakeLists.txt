@@ -1,4 +1,5 @@
 set(SRC
+    helper.cpp
     seal.cpp
     shape.cpp
 )
