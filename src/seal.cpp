@@ -86,26 +86,26 @@ void seal::run() {
     }
 }
 
-void seal::background(uint8_t gray) { g_currentBackground = {gray, gray, gray}; }
-void seal::background(uint8_t red, uint8_t green, uint8_t blue) { g_currentBackground = {red, green, blue}; }
+void seal::background(uint8_t gray, uint8_t alpha) { g_currentBackground = {gray, gray, gray, alpha}; }
+void seal::background(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha) { g_currentBackground = {red, green, blue, alpha}; }
 
-void seal::fill(uint8_t gray) {
+void seal::fill(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha) {
     g_fillEnabled = true;
-    g_currentFill = {gray, gray, gray};
+    g_currentFill = {red, green, blue, alpha};
 }
 
-void seal::fill(uint8_t red, uint8_t green, uint8_t blue) {
+void seal::fill(uint8_t gray, uint8_t alpha) {
     g_fillEnabled = true;
-    g_currentFill = {red, green, blue};
+    g_currentFill = {gray, gray, gray, alpha};
 }
 
 void seal::noFill() { g_fillEnabled = false; }
 
 void seal::noStroke() { g_strokeEnabled = false; }
 
-void seal::stroke(uint8_t red, uint8_t green, uint8_t blue) {
+void seal::stroke(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha) {
     g_strokeEnabled = true;
-    g_currentStroke = {red, green, blue};
+    g_currentStroke = {red, green, blue, alpha};
 }
 
 void seal::popStyle() {

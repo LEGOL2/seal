@@ -55,13 +55,13 @@ void strokeWeight(float weight);
 // Color
 //   Creating & Reading
 //   Setting
-void background(uint8_t gray);
-void background(uint8_t red, uint8_t green, uint8_t blue);
-void fill(uint8_t gray);
-void fill(uint8_t red, uint8_t green, uint8_t blue);
+void background(uint8_t gray, uint8_t alpha = 255);
+void background(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha = 255);
+void fill(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha = 255);
+void fill(uint8_t gray, uint8_t alpha = 255);
 void noFill();
 void noStroke();
-void stroke(uint8_t red, uint8_t green, uint8_t blue);
+void stroke(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha = 255);
 
 // Transform
 
