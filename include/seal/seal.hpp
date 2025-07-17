@@ -1,12 +1,23 @@
 #pragma once
 
-#include <stdint.h>
+#include <cstdint>
 
 extern void setup();
 extern void draw();
 
 namespace seal {
 enum EllipseMode { CENTER, RADIUS, CORNER, CORNERS };
+
+class Color {
+   public:
+    constexpr Color() = default;
+    constexpr Color(std::uint8_t red, std::uint8_t green, std::uint8_t blue, std::uint8_t alpha = 255);
+    std::uint8_t r{};
+    std::uint8_t g{};
+    std::uint8_t b{};
+    std::uint8_t a{255};
+};
+
 // Runtime management
 void init();
 void run();
@@ -29,6 +40,11 @@ float mouseY();
 // Rendering
 
 // Image
+//   Pixels
+Color getPixel(uint32_t x, uint32_t y);
+void loadPixels();
+void setPixel(uint32_t x, uint32_t y, const Color& color);
+void updatePixels();
 
 // Shape
 //   2D Primitives
@@ -72,6 +88,8 @@ void pushStyle();
 // Control
 
 // Environment
+uint32_t height();
 void size(uint32_t w, uint32_t h);
+uint32_t width();
 void windowTitle(const char* title);
 }  // namespace seal

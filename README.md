@@ -78,6 +78,11 @@ int main() {
 ## Rendering
 
 ## Image
+### Pixels
+- [x] `loadPixels()` - Loads the pixel data for the display window. Access pixels by `getPixel()` and `setPixel()` functions.
+- [x] `updatePixels()` - Updates the display window with the data accessed by `getPixel()` and `setPixel()` functions.
+- [x] `getPixel()` - Returns `seal::Color` pixel designated by `x` and `y` coordiantes. Not available in Processing
+- [x] `setPixel()` - Sets the pixel designated by `x` and `y` to the provided `seal::Color`. Not available in Processing
 
 ## Shape
 ### 2D primitives
@@ -119,5 +124,7 @@ int main() {
 ## Control
 
 ## Envioronment
+- [x] `height()` - Get the height of the display window. **This is a function, instead of a variable like in Processing**
 - [x] `size()` - Defines the dimension of the display window in units of pixels
+- [x] `width()` - Get the width of the display window. **This is a function, instead of a variable like in Processing**
 - [x] `windowTitle()` - Defines the title to appear at the top of the sketch window
