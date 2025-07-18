@@ -1,5 +1,3 @@
-#include <cstdlib>
-#include <ctime>
 #include <seal/seal.hpp>
 
 using namespace seal;
@@ -15,7 +13,7 @@ void draw() {
     loadPixels();
     for (int y = 0; y < width(); y++) {
         for (int x = 0; x < height(); x++) {
-            uint8_t g = rand() % 255;
+            uint8_t g = noise(x*0.01, y*0.03)*255;
             setPixel(x, y, {g, g, g});
         }
     }
@@ -23,6 +21,5 @@ void draw() {
 }
 
 int main() {
-    srand(time(nullptr));
     run();
 }

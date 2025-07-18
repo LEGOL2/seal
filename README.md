@@ -102,6 +102,12 @@ int main() {
 ## Output
 
 ## Math
+### Random
+- [x] `noise()` - Returns the Perlin noise value at specified coordinates
+- [x] `noiseDetail()` - Adjusts the character and level of detail produced by the Perlin noise function
+- [x] `noiseSeed()` - Sets the seed value for `noise()`
+- [x] `randomSeed()` - Sets the seed value for `random()`
+- [x] `random()` - Generates random numbers
 
 ## Lights & Camera
 

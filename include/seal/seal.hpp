@@ -65,6 +65,14 @@ void strokeWeight(float weight);
 // Output
 
 // Math
+//   Random
+float noise(float x);
+float noise(float x, float y);
+float noise(float x, float y, float z);
+void noiseDetail(int lod, float falloff);
+void randomSeed(int seed);
+float random(float high = 1.f);
+float random(float low, float high);
 
 // Lights & Camera
 
