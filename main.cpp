@@ -13,13 +13,11 @@ void draw() {
     loadPixels();
     for (int y = 0; y < width(); y++) {
         for (int x = 0; x < height(); x++) {
-            uint8_t g = noise(x*0.01, y*0.03)*255;
+            uint8_t g = noise(x * 0.005, y * 0.005) * 255;
             setPixel(x, y, {g, g, g});
         }
     }
     seal::updatePixels();
 }
 
-int main() {
-    run();
-}
+int main() { run(); }

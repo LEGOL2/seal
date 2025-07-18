@@ -3,10 +3,11 @@
 #include <seal/seal.hpp>
 
 namespace {
+// Improved Perlin noise implementation by Adrian Biagioli https://adrianb.io/2014/08/09/perlinnoise.html
 class PerlinNoise {
    public:
     PerlinNoise() { reseed(time(nullptr)); }
-    
+
     float noise(float x, float y = 0.f, float z = 0.f) const {
         float total = 0;
         float frequency = 1;
